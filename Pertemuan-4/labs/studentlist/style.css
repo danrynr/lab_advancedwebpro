@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Recursive:wght@400;500;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+
+body {
+    margin: auto;
+    padding: 0;
+    font-family: 'Recursive', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    background-color: antiquewhite;
+    padding: 12px 24px
+}
+
+input {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+input[type="number"] {
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    padding: 12px 12px;
+    border-radius: 6px;
+}
+
+input[type="text"] {
+    width: 150px;
+    height: 30px;
+    border: 1px solid black;
+    padding: 12px 12px;
+    border-radius: 6px;
+}
+
+input[type="submit"] {
+    padding: 6px 12px;
+    width: 150px;
+    border-radius: 6px;
+}
+
+.output {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+h3 {
+    text-align: center;
+    padding-bottom: 12px;
+    margin-top: 16px;
+}
+
+.list {
+    background-color: rgb(183, 221, 255);
+    border-radius: 6px;
+    margin-top: 16px;
+}
+
+.card {
+    background-color: #f5bd7d;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 20px;
+    width: 500px;
+}

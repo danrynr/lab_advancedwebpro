@@ -2,33 +2,9 @@
 <html>
     <head>
         <title>Tambah data mahasiswa</title>
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-    <?php
-    $filename = "./mahasiswa.txt";
-    $file = fopen($filename, "r");
-
-        if ($file == false) {
-            echo ("Error in opening file");
-            exit;
-        }
-
-        $filesize = filesize($filename);
-        $filetext = fread($file, $filesize);
-        
-        fclose($file);
-
-    if (isset($_POST['nrp'])) {
-        $wfile = fopen($filename, "a");
-        if ($wfile == false) {
-            echo ("Error in opening file");
-            exit;
-        }
-        $input = $_POST['nrp'];
-        fwrite($wfile, "\n". $input);
-        fclose($file);
-    }
-    ?>
     
     <form method="POST">
         <table>
@@ -38,11 +14,21 @@
         </table>
     </form>
     <div class="output">
-        <?php 
-        $keywords = preg_split("/[\s,]+/", $filetext);
-        foreach ($keywords as $keyword) {
-            echo print_r($keyword) . "<br>";
-        }
+        <?php
+            $read = fopen('./fileoutput/mahasiswa.txt', "a+");
+            if (isset($_POST['nrp'])) {
+                fwrite($read, $_POST['nrp'] . "\n");
+                fseek($read, 0);
+            }
+
+            $data = fread($read, filesize('mahasiswa.txt'));
+            $result = explode("\n", $data);
+
+            foreach ($result as $output) {
+                echo "NRP : " . $output . "<br>";
+            }
+
+            fclose($read);
         ?>
     </div>
     </body>

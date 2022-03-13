@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Orbitron&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: auto;
+}
+
+body {
+    margin-top: 18vh;
+    padding: 0;
+    font-family: 'Gugi', cursive;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 228, 203);
+}
+
+.main {
+    background-color: #f5f5f5;
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+form {
+    background-color: rgb(202, 202, 202);
+    padding: 12px 24px;
+    border-radius: 6px;
+}
+
+input {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+input[type="number"] {
+    outline: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    width: 320px;
+    height: 50px;
+    border: 2px solid #f5bd7d;
+    padding: 4px 4px;
+    border-radius: 6px;
+}
+
+input[type="submit"] {
+    background-color: #f5bd7d;
+    color: black;
+    font-size: 32px;    
+    padding: 6px 12px;
+    width: 88px;
+    height: 88px;
+    border-radius: 6px;
+    box-shadow: 0px 5px lightblue;
+}
+
+input[type="submit"]:active {
+    transform: translateY(3px);
+    box-shadow: 0px 2px lightblue;
+}
+
+.op td{
+    padding: 8px;
+}
+
+.result {
+    border: 2px solid #f5bd7d;
+    border-radius: 6px;
+    background-color: lightblue;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    
+}
+
+.result h3 {
+    text-align: center;
+    padding: 6px;
+}
+
+h3 {
+    text-align: center;
+    padding-bottom: 12px;
+}
+
+.title {
+    padding-top: 8px;
+}
+
+p {
+    text-align: center;
+    padding-top: 12px;
+}
