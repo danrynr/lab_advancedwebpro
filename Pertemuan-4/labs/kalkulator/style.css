@@ -54,6 +54,7 @@ input[type="submit"] {
     height: 88px;
     border-radius: 6px;
     box-shadow: 0px 5px lightblue;
+    cursor: pointer;
 }
 
 input[type="submit"]:active {
