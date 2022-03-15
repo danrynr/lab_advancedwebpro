@@ -38,6 +38,8 @@ input[type="submit"] {
     border: 2px solid #4287f5;
     border-radius: 6px;
     cursor: pointer;
+    margin-top: 12px;
+    float: right;
 }
 
 .welcome {
