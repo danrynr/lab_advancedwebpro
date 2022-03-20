@@ -8,7 +8,6 @@
         <?php
             session_start();
             
-            // use credential for login details
             if (isset($_POST['login'])) {
                 if (isset($_POST['username']) && isset($_POST['password'])) {
                     $username = isset($_POST['username']) ? $_POST['username'] : '';
