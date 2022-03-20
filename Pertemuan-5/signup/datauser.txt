@@ -4,3 +4,5 @@
 23456;fsrwer;efsv;sdf;2022-03-02;P;bom;bom
 342424;fsdfsf;af;fsfsfsf;2022-02-28;L;dan;dan
 378754324;TOMI;safs;DKV;2022-03-01;L;san;san
+659725925;Asep;Pantai Indah Kapuk;Informatika;2022-03-02;L;aaseap;aaseap
+45467;gfdsgs;gsfg;gfdss;2022-02-02;P;asd;asd

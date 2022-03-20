@@ -83,10 +83,13 @@ a {
 
 table {
     width: 100%;
+}
+.datatable {
+    width: 100%;
     border-collapse: collapse;
 }
 
-th, td{
+.datatable th, .datatable td {
     border: 2px solid #4287f5;
     padding: 8px;
 }

@@ -24,11 +24,11 @@
             $pattern_data = "/[;]+/";
 
             $lines = file_get_contents('datauser.txt');
-            $lines = file('datauser.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            $lines = file('datauser.txt', FILE_SKIP_EMPTY_LINES);
 
             echo "<div class='list'>";
             echo "<h3>Data User yang lahir di bulan Maret</h3>";
-            echo "<table>";
+            echo "<table class='datatable'>";
             echo "<tr>";
             echo "<th>NRP</th>";
             echo "<th>Nama Mahasiswa</th>";
