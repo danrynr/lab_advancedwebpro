@@ -39,7 +39,7 @@
                 }
             }
         ?>
-        <div class="card">
+        <div class="card panel-c shadow">
             <div class="centerItem"><h3>Login</h3></div>
             <form action="" method="post">
                 <table>
@@ -49,23 +49,22 @@
                     <tr>
                         <td><label for="uname">Username &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="text" name="username"></div></td>
+                        <td><input type="text" name="username"></td>
                     </tr>
                     <tr>
                         <td><label for="pass">Password &nbsp;</td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="password" name="password"></div></td>
+                        <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            <div class="centerItem">
-                                <input type="submit" name="login" value="Login">
-                            </div>
-                        </td>
+                        <td colspan="3"><input type="submit" name="login" value="Login"></td>
                     </tr>
                 </table>
             </form>
             <p>Belum memiliki akun? <a href="./signup.php">sign up</a></p>
+            <?php
+                include './footer.php';
+            ?>
         </div>
     </body>
 </html>

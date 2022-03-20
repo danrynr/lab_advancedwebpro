@@ -46,7 +46,8 @@
                 }
             }
         ?>
-        <div class="card">
+        <div class="bg-image"></div>
+        <div class="card panel-c shadow">
             <div class="centerItem"><h3>Sign Up</h3></div>
             <form action="" method="post">
                 <table>
@@ -61,52 +62,51 @@
                     <tr>
                         <td><label for="name">Nama Mahasiswa &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="text" name="name" maxlength="30"></div></td>
+                        <td><input type="text" name="name" maxlength="30"></td>
                     </tr>
                     <tr>
                         <td><label for="address">Alamat &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="text" name="address"></div></td>
+                        <td><input type="text" name="address"></td>
                     </tr>
                     <tr>
                         <td><label for="prodi">Program Studi &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="text" name="prodi"></div></td>
+                        <td><input type="text" name="prodi"></td>
                     </tr>
                     <tr>
                         <td><label for="birthdate">Tanggal Lahir &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="date" name="birthdate"></div></td>
+                        <td><input type="date" name="birthdate"></td>
                     </tr>
                     <tr>
                         <td><label for="gender">Jenis Kelamin &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><select id="gender" name="gender">
+                        <td><select id="gender" name="gender">
                                                         <option value="L">L</option>
                                                         <option value="P">P</option>
-                                                    </select></div>
+                                                    </select>
                         </td>
                     </tr>
                     <tr>
                         <td><label for="uname">Username &nbsp;</label></td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="text" name="username"></div></td>
+                        <td><input type="text" name="username"></td>
                     </tr>
                     <tr>
                         <td><label for="pass">Password &nbsp;</td>
                         <td>:</td>
-                        <td><div class="centerItem"><input type="password" name="password"></div></td>
+                        <td><input type="password" name="password"></td>
                     </tr>
                     <tr>
-                        <td colspan="3">
-                            <div class="centerItem">
-                                <input type="submit" name="signup" value="Sign Up">
-                            </div>
-                        </td>
+                        <td colspan="3"><input type="submit" name="signup" value="Sign Up"></td>
                     </tr>
                 </table>
             </form>
             <p>Sudah punya akun? Silakan <a href="./login.php">login</a></p>
+            <?php
+                include './footer.php';
+            ?>
         </div>
     </body>
 </html>

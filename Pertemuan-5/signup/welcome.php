@@ -13,7 +13,7 @@
         }
         $date = date("d F Y").', '.date("h:i");
         ?>
-        <div class="card">
+        <div class="card shadow">
             <h3><?php echo "Welcome "."<span style='color:blue'>".$_SESSION['username']."</span>!"; ?></h3>
             <h3><?php echo "<span style='color:blue'>".$_SESSION['username']."</span>"." berhasil login pada ".$date; ?></h3>
             <div class="centerItem">
@@ -26,9 +26,11 @@
             $lines = file_get_contents('datauser.txt');
             $lines = file('datauser.txt', FILE_SKIP_EMPTY_LINES);
 
-            echo "<div class='list'>";
+            echo "<div class='list shadow'>";
             echo "<h3>Data User yang lahir di bulan Maret</h3>";
-            echo "<table class='datatable'>";
+            echo "<div class='scroll'>";
+            echo "<table class='datatable scrolltab'>";
+            echo "<thead>";
             echo "<tr>";
             echo "<th>NRP</th>";
             echo "<th>Nama Mahasiswa</th>";
@@ -37,6 +39,9 @@
             echo "<th>Tanggal Lahir</th>";
             echo "<th>Jenis Kelamin</th>";
             echo "<tr>";
+            echo "</thead>";
+            echo "<tbody>";
+
             foreach ($lines as $line) {
                 $data = preg_split($pattern_data, $line);
 
@@ -55,7 +60,11 @@
                     echo "</tr>";
                 }
             }
+            echo "</tbody>";
             echo "</table>";
+            echo "</div>";
+            
+            include './footer.php';
         ?>
     </body>
 </html>

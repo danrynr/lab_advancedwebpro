@@ -1,8 +1,11 @@
-202128434;Daniel;Puri Gading;Informatika;2022-04-02;L;danrynr;danrynr
-342542345;Bimo;abcdefg;DKV;2022-03-15;L;qwerty;qwerty
-332135555;DUN;abcdefg;DKV;2003-03-11;L;dudu;dudu
-23456;fsrwer;efsv;sdf;2022-03-02;P;bom;bom
-342424;fsdfsf;af;fsfsfsf;2022-02-28;L;dan;dan
-378754324;TOMI;safs;DKV;2022-03-01;L;san;san
-659725925;Asep;Pantai Indah Kapuk;Informatika;2022-03-02;L;aaseap;aaseap
-45467;gfdsgs;gsfg;gfdss;2022-02-02;P;asd;asd
+202128434;Daniel;Puri Gading;Informatika;2003-04-02;L;danrynr;danrynr
+342542345;Bimo;Meikarta;DKV;2000-03-15;L;qwerty;qwerty
+332135555;DUN;asdfg;DKV;2003-03-11;L;dudu;dudu
+234511116;Bomi;efsv;sdf;2003-03-02;P;bom;bom
+342424222;Rina;Mangga Dua;Bisnis;2003-04-28;P;dan;dan
+378754324;TOMI;Jl. Kencana;DKV;2002-03-01;L;san;san
+659725925;Asep;Pantai Indah Kapuk;Informatika;2002-03-02;L;aaseap;aaseap
+454333347;Rin;PIK;Sistem Informasi;2003-03-02;P;asd;asd
+442554454;Sam;Jakarta;DKV;1999-01-12;L;sm;sm
+213113131;Argya;Bekasi;Informatika;2001-03-11;L;aa;aa
+313131314;Citra;Bekasi;Informatika;2001-03-22;P;bb;bb
