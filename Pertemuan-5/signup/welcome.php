@@ -49,7 +49,7 @@
                 $month = preg_match($pattern, $data[4], $match);
                 $month = $match[0];
                 
-                if ($match[0] == $data[4]) {
+                if ($month == $data[4]) {
                     echo "<tr>";
                     echo "<td>".$data[0]."</td>";
                     echo "<td>".$data[1]."</td>";
