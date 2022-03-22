@@ -10,3 +10,5 @@
 213113131;Argya;Bekasi;Informatika;2001-03-11;L;aa;aa
 313131314;Citra;Bekasi;Informatika;2001-03-22;P;bb;bb
 43242;fdsfa;fads;fsfs;2022-02-28;P;qwer;qwer
+123;Dan;Kalbis;IF;2022-03-08;L;dan dan;dan dan
+3749735;apaaja;RumahKita;Informatika;2005-03-23;L;sumo;sumo

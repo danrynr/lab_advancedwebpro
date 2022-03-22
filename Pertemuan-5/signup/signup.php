@@ -25,7 +25,7 @@
                         $lines = explode("\n", $lines);
                         foreach ($lines as $line) {
                             $data = preg_split($pattern, $line);
-                            $username_array[] = $data[6];
+                            $username_array[] = $data[6] ?? NULL;
                         }
 
                         if (in_array($username, $username_array)) {
