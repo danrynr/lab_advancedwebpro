@@ -12,3 +12,7 @@
 43242;fdsfa;fads;fsfs;2022-02-28;P;qwer;qwer
 123;Dan;Kalbis;IF;2022-03-08;L;dan dan;dan dan
 3749735;apaaja;RumahKita;Informatika;2005-03-23;L;sumo;sumo
+69420;Andi Nurdin;Jl. Bebas Blok Kubus No. 9;Informatika;2001-01-01;P;nurdin;nurdin
+03939;nicolas;kalbis;Informatika;2001-01-01;L;nc;nc
+4324;fsdfa;afaf;sfsfsfdsf;2022-03-10;L;qwerf;qwerf
+45677654;qwertyuioppoiuyt;asdfghnbvc;dssdfgh;2021-11-23;L;cvbng;cvbng
