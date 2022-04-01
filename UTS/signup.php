@@ -23,34 +23,52 @@
                     if (empty($name) || empty($birthdate) || empty($gender) || empty($education) || empty($address) || empty($hobby) || empty($username) || empty($password)) {
                         $msg = "<span style='color:red'>Semua field harus diisi!</span>";
                     } else {
-                        $pattern = "/[,]+/";
-                        $lines = file_get_contents('./datauser.txt');
-                        $lines = explode("\n", $lines);
-                        foreach ($lines as $line) {
-                            $data = preg_split($pattern, $line);
-                            $username_array[] = $data[6] ?? NULL;
-                        }
+                        
+                        $array = Array(
+                            $username => Array (
+                            "name" => "$name",
+                            "birthdate" => "$birthdate",
+                            "gender" => "$gender",
+                            "education" => "$education",
+                            "address" => "$address",
+                            "password" => "$password",
+                            "course" => Array (
+                                "PS" => 0,
+                                "VC" => 0,
+                                "NET" => 0,
+                                "HP" => 0
+                                )
+                            )
+                        );
 
-                        if (in_array($username, $username_array)) {
-                            $msg = "<span style='color:red'>Username sudah terdaftar!</span>";
+                        $json_data = json_decode(file_get_contents('datauser.txt'), true);
+                        
+                        if ($json_data[$username] != NULL) {
+                            $msg = "<span style='color:red'>Username sudah ada!</span>";
                         } else {
                             if ($username == $password) {
-                                $read = fopen('./datauser.txt', "a+");
-                                fwrite($read, "$name,$birthdate,$gender,$education,$address,$hobby,$username,$password" . "\n");
-                                fseek($read, 0);
-                                fclose($read);
-        
-                                $msg = "<span style='color:green'>Data berhasil disimpan!</span>";
+                                $json_prev = json_decode(file_get_contents('datauser.txt'), true);
+
+                                if($json_prev == NULL) {
+                                    $json_data = json_encode($array);
+                                    file_put_contents('datauser.txt', $json_data);
+                                } else {
+                                    $json_data = array_merge($json_prev, $array);
+                                    $json_data = json_encode($json_data);
+                                    file_put_contents('datauser.txt', $json_data);
+                                }
+                                
+                                $msg = "<span style='color:green'>Registrasi berhasil!</span>";
                             } else {
                                 $msg = "<span style='color:red'>Username dan Password harus sama!</span>";
                             }
-                        }   
+                        }
                     }
                 }
             ?>
             <form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
                 <h2>Sign Up</h2>
-                <p><?php if (isset($msg)) { echo $msg; }; ?></p>
+                <p class="warning"><?php if (isset($msg)) { echo $msg; }; ?></p>
                 <label for="name">Nama: </label><br>
                 <input type="text" name="name" id="name"><br>
                 <label for="birthdate">Tanggal Lahir: </label><br>
@@ -76,6 +94,7 @@
                 <label for="password">Password</label><br>
                 <input type="password" name="password" id="password"><br>
                 <button name="register" value="Register">Register</button>
+                <p>Sudah memiliki akun? Silakan <a class="btn" href="./login.php">Login</a></p>
             </form>
         </div>
     </body>

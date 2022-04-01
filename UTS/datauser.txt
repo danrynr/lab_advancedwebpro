@@ -1,1 +1,1 @@
-Dan,2022-03-23,L,SD,12345AA,fdafadfas,test12,test12
+{"123":{"name":"Daniel","birthdate":"2003-04-07","gender":"L","education":"Sarjana","address":"PURGAD","password":"123","course":{"PS":0,"VC":0,"NET":0,"HP":0}}}
