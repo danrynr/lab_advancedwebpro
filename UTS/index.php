@@ -38,34 +38,6 @@
         $diskon2 = 0;
         $subtotal = 0;
 
-
-        if($_SESSION['username']) {
-            $json_output = json_decode(file_get_contents('usercart.txt'), true);
-
-            $data_jumps = $json_output[$username]['jumps'];
-            $data_jumvc = $json_output[$username]['jumvc'];
-            $data_jumnet = $json_output[$username]['jumnet'];
-            $data_jumhp = $json_output[$username]['jumhp'];
-
-            $data_hargaps = $json_output[$username]['hargaps'];
-            $data_hargavc = $json_output[$username]['hargavc'];
-            $data_harganet = $json_output[$username]['harganet'];
-            $data_hargahp = $json_output[$username]['hargahp'];
-            $data_diskon1 = $json_output[$username]['diskon1'];
-            $data_diskon2 = $json_output[$username]['diskon2'];
-            $data_subtotal = $json_output[$username]['subtotal'];
-
-            //NUMBER FORMAT
-            $ps_text = number_format($data_hargaps, 2, ',', '.');
-            $vc_text = number_format($data_hargavc, 2, ',', '.');
-            $net_text = number_format($data_harganet, 2, ',', '.');
-            $hp_text = number_format($data_hargahp, 2, ',', '.');
-
-            $diskon1_text = number_format($data_diskon1, 2, ',', '.');
-            $diskon2_text = number_format($data_diskon2, 2, ',', '.');
-            $subtotal_text = number_format($data_subtotal, 2, ',', '.');
-        }
-
         if(isset($_POST['save'])) {
             //Jumlah item yang dibeli
             $jumps = $_POST['ps-q'];
@@ -163,17 +135,30 @@
         $diskon2_text = number_format($data_diskon2, 2, ',', '.');
         $subtotal_text = number_format($data_subtotal, 2, ',', '.');
         
+        if (isset($_POST['order'])) {
+            $json_data_cart = json_decode(file_get_contents('usercart.txt'), true);
+            $json_data_cart[$username] = Array();
+            $json_data_cart = json_encode($json_data_cart);
+
+            $ps_text = number_format(0, 2, ',', '.');
+            $vc_text = number_format(0, 2, ',', '.');
+            $net_text = number_format(0, 2, ',', '.');
+            $hp_text = number_format(0, 2, ',', '.');
+
+            $diskon1_text = number_format(0, 2, ',', '.');
+            $diskon2_text = number_format(0, 2, ',', '.');
+            $subtotal_text = number_format(0, 2, ',', '.');
+        }
     ?>
 
     <header>
         <div class="container">
-            <div class="logo">
-
-            </div>
             <nav>
                 <ul>
-                    <li><a href="logout.php">Logout</a></li>
+                    <li><?php echo "Hello, <b>$username</b>"; ?></li>
+                    <li><a href="logout.php">Logout <ion-icon name="log-out-outline"></ion-icon></a></li>
                 </ul>
+            </nav>
         </div>
     </header>
     
@@ -222,6 +207,7 @@
             </div>
         </form>
     </div>
-    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
