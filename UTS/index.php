@@ -38,6 +38,34 @@
         $diskon2 = 0;
         $subtotal = 0;
 
+
+        if($_SESSION['username']) {
+            $json_output = json_decode(file_get_contents('usercart.txt'), true);
+
+            $data_jumps = $json_output[$username]['jumps'];
+            $data_jumvc = $json_output[$username]['jumvc'];
+            $data_jumnet = $json_output[$username]['jumnet'];
+            $data_jumhp = $json_output[$username]['jumhp'];
+
+            $data_hargaps = $json_output[$username]['hargaps'];
+            $data_hargavc = $json_output[$username]['hargavc'];
+            $data_harganet = $json_output[$username]['harganet'];
+            $data_hargahp = $json_output[$username]['hargahp'];
+            $data_diskon1 = $json_output[$username]['diskon1'];
+            $data_diskon2 = $json_output[$username]['diskon2'];
+            $data_subtotal = $json_output[$username]['subtotal'];
+
+            //NUMBER FORMAT
+            $ps_text = number_format($data_hargaps, 2, ',', '.');
+            $vc_text = number_format($data_hargavc, 2, ',', '.');
+            $net_text = number_format($data_harganet, 2, ',', '.');
+            $hp_text = number_format($data_hargahp, 2, ',', '.');
+
+            $diskon1_text = number_format($data_diskon1, 2, ',', '.');
+            $diskon2_text = number_format($data_diskon2, 2, ',', '.');
+            $subtotal_text = number_format($data_subtotal, 2, ',', '.');
+        }
+
         if(isset($_POST['save'])) {
             //Jumlah item yang dibeli
             $jumps = $_POST['ps-q'];
@@ -73,10 +101,10 @@
             $subtotal = $kursus - ($diskon1 + $diskon2);
         }
 
-
+        $username = $_SESSION['username'];
 
         $array_cart = Array (
-            $_SESSION['username'] => Array (
+            $username => Array (
                 "jumps" => "$jumps",
                 "hargaps" => "$ps1",
                 "jumvc" => "$jumvc",
@@ -87,36 +115,43 @@
                 "hargahp" => "$hp1",
                 "diskon1" => "$diskon1",
                 "diskon2" => "$diskon2",
-                "subtotal" => "$subtotal",
+                "subtotal" => "$subtotal"
             )
         );
         
         $json_cart = json_decode(file_get_contents('usercart.txt'), true);
+        $json_cart_prev = json_decode(file_get_contents('usercart.txt'), true);
 
-        if ($json_cart[$_SESSION['username']] == NULL) {
-            $json_cart[$_SESSION['username']] == Array ();
-            $json_cart = json_encode($array_cart[$_SESSION['username']]);
+        if ($json_cart == NULL) {
+            $json_cart = json_encode($array_cart);
             file_put_contents('usercart.txt', $json_cart);
         } else {
-            $json_cart = array_merge($json_cart, $array_cart);
-            $json_cart = json_encode($json_cart);
-            file_put_contents('usercart.txt', $json_cart);
+            if ($json_cart[$username] != NULL) {
+                $json_cart[$username] = Array();
+                $json_cart = array_merge($json_cart_prev, $array_cart);
+                $json_cart = json_encode($json_cart);
+                file_put_contents('usercart.txt', $json_cart);
+            } else {
+                $json_cart = array_merge($json_cart_prev, $array_cart);
+                $json_cart = json_encode($json_cart);
+                file_put_contents('usercart.txt', $json_cart);
+            }
         }
 
         $json_output = json_decode(file_get_contents('usercart.txt'), true);
 
-        $data_jumps = $json_output[$_SESSION['username']]['jumps'];
-        $data_jumvc = $json_output[$_SESSION['username']]['jumvc'];
-        $data_jumnet = $json_output[$_SESSION['username']]['jumnet'];
-        $data_jumhp = $json_output[$_SESSION['username']]['jumhp'];
+        $data_jumps = $json_output[$username]['jumps'];
+        $data_jumvc = $json_output[$username]['jumvc'];
+        $data_jumnet = $json_output[$username]['jumnet'];
+        $data_jumhp = $json_output[$username]['jumhp'];
 
-        $data_hargaps = $json_output[$_SESSION['username']]['hargaps'];
-        $data_hargavc = $json_output[$_SESSION['username']]['hargavc'];
-        $data_harganet = $json_output[$_SESSION['username']]['harganet'];
-        $data_hargahp = $json_output[$_SESSION['username']]['hargahp'];
-        $data_diskon1 = $json_output[$_SESSION['username']]['diskon1'];
-        $data_diskon2 = $json_output[$_SESSION['username']]['diskon2'];
-        $data_subtotal = $json_output[$_SESSION['username']]['subtotal'];
+        $data_hargaps = $json_output[$username]['hargaps'];
+        $data_hargavc = $json_output[$username]['hargavc'];
+        $data_harganet = $json_output[$username]['harganet'];
+        $data_hargahp = $json_output[$username]['hargahp'];
+        $data_diskon1 = $json_output[$username]['diskon1'];
+        $data_diskon2 = $json_output[$username]['diskon2'];
+        $data_subtotal = $json_output[$username]['subtotal'];
 
         //NUMBER FORMAT
         $ps_text = number_format($data_hargaps, 2, ',', '.');
