@@ -31,45 +31,28 @@
         $net = 100000;
         $hp = 80000;
 
-        $json_data = json_decode(file_get_contents('datauser.txt'), true); 
-        $json_prev = json_decode(file_get_contents('datauser.txt'), true);
-
-        // $ps1 = $json_data[$_SESSION[$username]]['course']['PS'];
-        // $vc1 = $json_data[$_SESSION[$username]]['course']['VC'];
-        // $net1 = $json_data[$_SESSION[$username]]['course']['NET'];
-        // $hp1 = $json_data[$_SESSION[$username]]['course']['HP'];
+        //Variable untuk data per user
+        $jumps = 0; $jumvc = 0; $jumnet = 0; $jumhp = 0;
+        $ps1 = 0; $vc1 = 0; $net1 = 0; $hp1 = 0;
+        $diskon1 = 0;
+        $diskon2 = 0;
+        $subtotal = 0;
 
         if(isset($_POST['save'])) {
+            //Jumlah item yang dibeli
             $jumps = $_POST['ps-q'];
             $jumvc = $_POST['vc-q'];
             $jumnet = $_POST['net-q'];
             $jumhp = $_POST['hp-q'];
 
-            //JUMLAH ITEM
+            //Kalkulasi jumlah item yang dibeli + diskon
             $ps1 = $ps * $jumps;
             $vc1 = $vc * $jumvc;
             $net1 = $net * $jumnet;
             $hp1 = $hp * $jumhp;
 
-            
-            $json_data[$_SESSION[$username]]['course']['PS'] = $ps1;
-            $json_data[$_SESSION[$username]]['course']['VC'] = $vc1;
-            $json_data[$_SESSION[$username]]['course']['NET'] = $net1;
-            $json_data[$_SESSION[$username]]['course']['HP'] = $hp1;
-
-            //Save the data to the file
-            $json_data = json_encode($json_data);
-            file_put_contents('datauser.txt', $json_data);
-
-
-            //TOTAL KURSUS
             $kursus = $ps1 + $vc1 + $net1 + $hp1;
-
-            $diskon1 = 0;
-            $diskon2 = 0;
-
             $pilkursus = ($jumps ? 1 : 0) + ($jumvc ? 1 : 0) + ($jumnet ? 1 : 0) + ($jumhp ? 1 : 0);
-            
             $gender = $_SESSION['gender'];
 
             if($kursus > 2000000) {
@@ -79,7 +62,7 @@
             } else if($pilkursus == 2) {
                 $diskon1 = ($kursus * 2) / 100;
             }
-            
+
             if($gender == "L") {
                 $diskon2 = ($kursus * 3) / 100;
             } else {
@@ -88,17 +71,63 @@
 
             //SUBTOTAL
             $subtotal = $kursus - ($diskon1 + $diskon2);
-
-            //NUMBER FORMAT
-            $ps_text = number_format($ps1, 2, ',', '.');
-            $vc_text = number_format($vc1, 2, ',', '.');
-            $net_text = number_format($net1, 2, ',', '.');
-            $hp_text = number_format($hp1, 2, ',', '.');
-
-            $diskon1_text = number_format($diskon1, 2, ',', '.');
-            $diskon2_text = number_format($diskon2, 2, ',', '.');
-            $subtotal_text = number_format($subtotal, 2, ',', '.');
         }
+
+
+
+        $array_cart = Array (
+            $_SESSION['username'] => Array (
+                "jumps" => "$jumps",
+                "hargaps" => "$ps1",
+                "jumvc" => "$jumvc",
+                "hargavc" => "$vc1",
+                "jumnet" => "$jumnet",
+                "harganet" => "$net1",
+                "jumhp" => "$jumhp",
+                "hargahp" => "$hp1",
+                "diskon1" => "$diskon1",
+                "diskon2" => "$diskon2",
+                "subtotal" => "$subtotal",
+            )
+        );
+        
+        $json_cart = json_decode(file_get_contents('usercart.txt'), true);
+
+        if ($json_cart[$_SESSION['username']] == NULL) {
+            $json_cart[$_SESSION['username']] == Array ();
+            $json_cart = json_encode($array_cart[$_SESSION['username']]);
+            file_put_contents('usercart.txt', $json_cart);
+        } else {
+            $json_cart = array_merge($json_cart, $array_cart);
+            $json_cart = json_encode($json_cart);
+            file_put_contents('usercart.txt', $json_cart);
+        }
+
+        $json_output = json_decode(file_get_contents('usercart.txt'), true);
+
+        $data_jumps = $json_output[$_SESSION['username']]['jumps'];
+        $data_jumvc = $json_output[$_SESSION['username']]['jumvc'];
+        $data_jumnet = $json_output[$_SESSION['username']]['jumnet'];
+        $data_jumhp = $json_output[$_SESSION['username']]['jumhp'];
+
+        $data_hargaps = $json_output[$_SESSION['username']]['hargaps'];
+        $data_hargavc = $json_output[$_SESSION['username']]['hargavc'];
+        $data_harganet = $json_output[$_SESSION['username']]['harganet'];
+        $data_hargahp = $json_output[$_SESSION['username']]['hargahp'];
+        $data_diskon1 = $json_output[$_SESSION['username']]['diskon1'];
+        $data_diskon2 = $json_output[$_SESSION['username']]['diskon2'];
+        $data_subtotal = $json_output[$_SESSION['username']]['subtotal'];
+
+        //NUMBER FORMAT
+        $ps_text = number_format($data_hargaps, 2, ',', '.');
+        $vc_text = number_format($data_hargavc, 2, ',', '.');
+        $net_text = number_format($data_harganet, 2, ',', '.');
+        $hp_text = number_format($data_hargahp, 2, ',', '.');
+
+        $diskon1_text = number_format($data_diskon1, 2, ',', '.');
+        $diskon2_text = number_format($data_diskon2, 2, ',', '.');
+        $subtotal_text = number_format($data_subtotal, 2, ',', '.');
+        
     ?>
 
     <header>
@@ -108,9 +137,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.php">Home</a></li>
-                    <li><a href="login.php">Login</a></li>
-                    <li><a href>Sign Up</a></li>
+                    <li><a href="logout.php">Logout</a></li>
                 </ul>
         </div>
     </header>
@@ -134,25 +161,25 @@
                 <h2>Pembelian</h2>
                 <div class="container-b">
                     <section class="course-section">
-                    <a class="course-name">PHP + MySQL</a><span class="nominal"><?php echo " Rp $ps_text"?></span>
+                    <a class="course-name">PHP + MySQL</a><span class="pertemuan"><?php echo " ($data_jumps) Pertemuan";?></span><span class="nominal"><?php echo " Rp $ps_text";?></span>
                     </section>
                     <section class="course-section">
-                    <a class="course-name">Virtualisasi + Cloud</a><span class="nominal"><?php echo " Rp $vc_text"?></span>
+                    <a class="course-name">Virtualisasi + Cloud</a><span class="pertemuan"><?php echo " ($data_jumvc) Pertemuan";?></span><span class="nominal"><?php echo " Rp $vc_text";?></span>
                     </section>
                     <section class="course-section">
-                    <a class="course-name">Networking</a><span class="nominal"><?php echo " Rp $net_text"?></span>
+                    <a class="course-name">Networking</a><span class="pertemuan"><?php echo " ($data_jumnet) Pertemuan";?></span><span class="nominal"><?php echo " Rp $net_text";?></span>
                     </section>
                     <section class="course-section">
-                    <a class="course-name">Hardware + Peripheral</a> <span class="nominal"><?php echo "Rp $hp_text"?></span>
+                    <a class="course-name">Hardware + Peripheral</a><span class="pertemuan"><?php echo " ($data_jumhp) Pertemuan";?></span><span class="nominal"><?php echo "Rp $hp_text";?></span>
                     </section>
                     <section class="discount-section">
-                    <a class="discount-info discount-one">Diskon</a><span class="nominal"><?php echo "- Rp $diskon1_text"?></span>
+                    <a class="discount-info discount-one">Diskon</a><span class="nominal"><?php echo "- Rp $diskon1_text";?></span>
                     </section>
                     <section class="discount-section">
-                    <a class="discount-info discount-two">Diskon Tambahan</a><span class="nominal"><?php echo "- Rp $diskon2_text"?></span>
+                    <a class="discount-info discount-two">Diskon Tambahan</a><span class="nominal"><?php echo "- Rp $diskon2_text";?></span>
                     </section>
                     <section class="subtotal-section">
-                    <a class="subtotal-info">Total Pembayaran</a><span class="nominal"><?php echo "Rp $subtotal_text"?></span>
+                    <a class="subtotal-info">Total Pembayaran</a><span class="nominal"><?php echo "Rp $subtotal_text";?></span>
                     </section>
                 </div>
 

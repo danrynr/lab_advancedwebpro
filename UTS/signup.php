@@ -31,13 +31,7 @@
                             "gender" => "$gender",
                             "education" => "$education",
                             "address" => "$address",
-                            "password" => "$password",
-                            "course" => Array (
-                                "PS" => 0,
-                                "VC" => 0,
-                                "NET" => 0,
-                                "HP" => 0
-                                )
+                            "password" => "$password"
                             )
                         );
 
