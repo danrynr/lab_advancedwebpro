@@ -8,13 +8,20 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php       
         if (isset($_POST['login'])) {
                 $username = isset($_POST['username']) ? $_POST['username'] : '';
                 $password = isset($_POST['password']) ? $_POST['password'] : '';
                 
             if ($username == '' || $password == '') {
-                $msg = "<span style='color:red'>Username dan Password harus diisi!</span>";
+                $msg = "<script>Swal.fire({
+                    title: 'Jangan lupa!',
+                    text: 'Username dan Password harus diisi!',
+                    icon: 'error',
+                    timer: 1500,
+                    confirmButtonText: 'Oke'
+                  });</script>";
             } else {
                 $json_data = json_decode(file_get_contents('datauser.txt'), true);
                 
@@ -25,9 +32,15 @@
                     header("location:index.php");
                     echo $gender;
                     exit;
-                    $msg = "<span style='color:green'>Login berhasil!</span>";
+                    
                 } else {
-                    $msg = "<span style='color:red'>Username atau Password salah!</span>";
+                    $msg = "<script>Swal.fire({
+                        title: 'Oops...',
+                        text: 'Username atau Password salah!',
+                        icon: 'error',
+                        timer: 1500,
+                        confirmButtonText: 'Oke'
+                      });</script>";
                 }
             }
         }

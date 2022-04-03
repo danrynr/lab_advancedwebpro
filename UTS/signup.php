@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="./style/style.css">
     </head>
     <body>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <div class="card shadow">
             <?php
                 if(isset($_POST['register'])) {
@@ -21,7 +22,13 @@
                     $password = $_POST['password'];
 
                     if (empty($name) || empty($birthdate) || empty($gender) || empty($education) || empty($address) || empty($hobby) || empty($username) || empty($password)) {
-                        $msg = "<span style='color:red'>Semua field harus diisi!</span>";
+                        $msg = "<script>Swal.fire({
+                            title: 'Jangan lupa!',
+                            text: 'Semua field harus diisi!',
+                            icon: 'error',
+                            timer: 1500,
+                            confirmButtonText: 'Oke'
+                          });</script>";
                     } else {
                         
                         $array = Array(
@@ -38,7 +45,13 @@
                         $json_data = json_decode(file_get_contents('datauser.txt'), true);
                         
                         if ($json_data[$username] != NULL) {
-                            $msg = "<span style='color:red'>Username sudah ada!</span>";
+                            $msg = "<script>Swal.fire({
+                                title: 'Username sudah ada!',
+                                text: 'Silakan gunakan username lain!',
+                                icon: 'error',
+                                timer: 2000,
+                                confirmButtonText: 'Oke'
+                              });</script>";
                         } else {
                             if ($username == $password) {
                                 $json_prev = json_decode(file_get_contents('datauser.txt'), true);
@@ -51,10 +64,26 @@
                                     $json_data = json_encode($json_data);
                                     file_put_contents('datauser.txt', $json_data);
                                 }
-                                
-                                $msg = "<span style='color:green'>Registrasi berhasil!</span>";
+                                $msg = "<script>const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: true,
+                                    timer: 3000,
+                                    timerProgressBar: true
+                                  })
+                                  
+                                  Toast.fire({
+                                    icon: 'success',
+                                    title: 'Signed in successfully'
+                                  });</script>";
                             } else {
-                                $msg = "<span style='color:red'>Username dan Password harus sama!</span>";
+                                $msg = "<script>Swal.fire({
+                                    title: 'Jangan Lupa!',
+                                    text: 'Username dan Password harus sama!',
+                                    icon: 'error',
+                                    timer: 2000,
+                                    confirmButtonText: 'Oke'
+                                  });</script>";
                             }
                         }
                     }

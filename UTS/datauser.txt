@@ -1,1 +1,1 @@
-{"qwe":{"name":"TEST1","birthdate":"2021-12-08","gender":"L","education":"Sarjana","address":"EEE","password":"qwe"},"asd":{"name":"TEST2","birthdate":"2021-11-16","gender":"P","education":"SLTA","address":"rty","password":"asd"},"zxc":{"name":"TEST3","birthdate":"2022-02-01","gender":"P","education":"SLTA","address":"fdsfs","password":"zxc"}}
+{"as":{"name":"fdaf","birthdate":"2022-04-13","gender":"L","education":"SD","address":"fda","password":"as"}}
