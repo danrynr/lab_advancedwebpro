@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>NIX Course | Dashboard</title>
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
     <?php
-        $timeout = 3600;
+        $timeout = 300; //SESSION TIMEOUT 5 MENIT
         ini_set("session.gc_maxlifetime", $timeout);
 
         session_start();
@@ -33,6 +33,11 @@
 
         $json_cart = json_decode(file_get_contents('usercart.txt'), true);
         $json_cart_prev = json_decode(file_get_contents('usercart.txt'), true);
+        
+        $percent_diskon1 = "0%";
+        $percent_diskon2 = "0%";
+        $diskon1 = 0;
+        $diskon2 = 0;
 
         if(isset($_POST['save'])) {
             //Jumlah item yang dibeli
@@ -40,6 +45,19 @@
             $jumvc = $_POST['vc-q'];
             $jumnet = $_POST['net-q'];
             $jumhp = $_POST['hp-q'];
+
+            if($jumps <= 0) {
+                $jumps = 0;
+            }
+            if($jumvc <= 0) {
+                $jumvc = 0;
+            }
+            if($jumnet <= 0) {
+                $jumnet = 0;
+            }
+            if($jumhp <= 0) {
+                $jumhp = 0;
+            }
 
             //Kalkulasi jumlah item yang dibeli + diskon
             $ps1 = $ps * $jumps;
@@ -50,9 +68,6 @@
             $kursus = $ps1 + $vc1 + $net1 + $hp1;
             $pilkursus = ($jumps ? 1 : 0) + ($jumvc ? 1 : 0) + ($jumnet ? 1 : 0) + ($jumhp ? 1 : 0);
             $gender = $_SESSION['gender'];
-
-            $percent_diskon1 = "0%";
-            $percent_diskon2 = "0%";
 
             if($kursus > 2000000) {
                 $diskon1 = ($kursus * 10) / 100;
@@ -65,16 +80,19 @@
                 $percent_diskon1 = "2%";
             }
 
-            if($gender == "L") {
-                $diskon2 = ($kursus * 5) / 100;
-                $percent_diskon2 = "3%";
-            } else {
-                $diskon2 = ($kursus * 3) / 100;
-                $percent_diskon2 = "2%";
+            if($kursus > 0) {
+                if($gender == "L") {
+                    $diskon2 = ($kursus * 5) / 100;
+                    $percent_diskon2 = "5%";
+                } else {
+                    $diskon2 = ($kursus * 3) / 100;
+                    $percent_diskon2 = "3%";
+                }
             }
 
             $subtotal = $kursus - ($diskon1 + $diskon2);
 
+            //SIMPAN DATA
             $array_cart = Array (
                 $username => Array (
                     "jumps" => "$jumps",
@@ -111,13 +129,13 @@
             }
         }
 
+        //AMBIL DATA
         $json_output = json_decode(file_get_contents('usercart.txt'), true);
 
         $data_jumps = $json_output[$username]['jumps'];
         $data_jumvc = $json_output[$username]['jumvc'];
         $data_jumnet = $json_output[$username]['jumnet'];
         $data_jumhp = $json_output[$username]['jumhp'];
-
         $data_hargaps = $json_output[$username]['hargaps'];
         $data_hargavc = $json_output[$username]['hargavc'];
         $data_harganet = $json_output[$username]['harganet'];
@@ -128,17 +146,6 @@
         $data_diskon2 = $json_output[$username]['diskon2'];
         $percent_diskon2_text = $json_output[$username]['diskon2_percent'];
         $data_subtotal = $json_output[$username]['subtotal'];
-
-        
-        $ps_text = number_format(0, 2, ',', '.');
-        $vc_text = number_format(0, 2, ',', '.');
-        $net_text = number_format(0, 2, ',', '.');
-        $hp_text = number_format(0, 2, ',', '.');
-        $total_text = number_format(0, 2, ',', '.');
-        $diskon1_text = number_format(0, 2, ',', '.');
-        $diskon2_text = number_format(0, 2, ',', '.');
-        $subtotal_text = number_format(0, 2, ',', '.');
-
 
         //NUMBER FORMATTING
         $ps_text = number_format($data_hargaps, 2, ',', '.');
@@ -178,10 +185,11 @@
         }
     ?>
 
-    <header>
-    
-        <div class="container">
-            
+    <header class="shadow">
+        <div class="container1">
+            <h1>NIX Course</h1>
+        </div>
+        <div class="container2">
             <nav>
                 <ul>
                     <li><?php echo "Hello, <b>$username</b>"; ?></li>

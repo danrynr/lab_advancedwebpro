@@ -18,10 +18,24 @@ header {
     width: 100%;
     margin-bottom: 24px;
     background-color: #91a7ff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .container {
-    display: flex;
+    height: 12vh;
+    padding: 12px;
+}
+
+.container1 {
+    float: left;
+    height: 12vh;
+    padding: 12px;
+}
+
+.container2 {
+    float: right;
     height: 12vh;
     padding: 12px;
 }
@@ -30,13 +44,12 @@ nav {
     font-size: 24px;
     width: 100%;
     padding: 12px;
-    display: flex;
     align-items: center;
-    justify-content: flex-end;
 }
 
 ul {
     list-style-type: none;
+    text-align: center;
 }
 
 li {

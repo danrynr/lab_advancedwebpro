@@ -46,6 +46,12 @@
         }
     ?>
 
+    <header class="shadow"> 
+        <div class="container">
+            <h1>NIX Course</h1>
+        </div>
+    </header>
+
     <div class="card shadow">
         <h2>Login</h2>
         <form action="<?php $_SERVER["PHP_SELF"]?>" method="post">

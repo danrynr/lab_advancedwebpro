@@ -9,6 +9,11 @@
     </head>
     <body>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <header> 
+            <div class="container">
+                <h1>NIX Course</h1>
+            </div>
+        </header class="shadow">
         <div class="card shadow">
             <?php
                 if(isset($_POST['register'])) {
@@ -89,6 +94,7 @@
                     }
                 }
             ?>
+
             <form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
                 <h2>Sign Up</h2>
                 <p class="warning"><?php if (isset($msg)) { echo $msg; }; ?></p>
