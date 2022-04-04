@@ -175,7 +175,7 @@
         $hp_init = number_format($hp, 2, '.', ',');
         
         //PAY AND CLEAR ORDER
-        if (isset($_POST['order'])) {
+        if (isset($_POST['order']) && $data_subtotal != 0) {
             $json_data_cart = json_decode(file_get_contents('usercart.txt'), true);
             $json_data_cart[$username] = Array();
             $json_data_cart = json_encode($json_data_cart);
@@ -196,16 +196,12 @@
             $diskon2_text = number_format(0, 2, ',', '.');
             $subtotal_text = number_format(0, 2, ',', '.');
 
-            $msg = "<script>const Toast = Swal.mixin({
-                toast: true,
+            $msg = "<script>Swal.fire({
                 position: 'top-end',
-                timer: 3000,
-                timerProgressBar: true
-              })
-              
-              Toast.fire({
                 icon: 'success',
-                title: 'Checkout Berhasil!'
+                title: 'Checkout Berhasil!',
+                showConfirmButton: false,
+                timer: 1500
               });</script>";
         }
     ?>
