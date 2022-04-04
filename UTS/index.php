@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php
         $timeout = 300; //SESSION TIMEOUT 5 MENIT
         ini_set("session.gc_maxlifetime", $timeout);
@@ -131,6 +132,14 @@
                     file_put_contents('usercart.txt', $json_cart);
                 }
             }
+
+            $msg = "<script>Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Berhasil menambahkan ke keranjang!',
+                showConfirmButton: false,
+                timer: 1500
+              });</script>";
         }
 
         //AMBIL DATA
@@ -186,6 +195,18 @@
             $diskon1_text = number_format(0, 2, ',', '.');            
             $diskon2_text = number_format(0, 2, ',', '.');
             $subtotal_text = number_format(0, 2, ',', '.');
+
+            $msg = "<script>const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                timer: 3000,
+                timerProgressBar: true
+              })
+              
+              Toast.fire({
+                icon: 'success',
+                title: 'Checkout Berhasil!'
+              });</script>";
         }
     ?>
 
@@ -205,6 +226,7 @@
     
     <div class="shop">
         <form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
+            <?php echo $msg;?>
             <div class="card shadow">
                 <h2>Pilih Kursus</h2>
                 <div class="course">
@@ -218,6 +240,7 @@
         </form>
 
         <form action="<?php $_SERVER["PHP_SELF"]?>" method="post">
+            <?php echo $msg;?>
             <div class="listcart card shadow" id="right">
                 <h2>Keranjang Pembelian</h2>
                 <div class="container-b">

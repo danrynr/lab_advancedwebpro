@@ -79,7 +79,7 @@
                                   
                                   Toast.fire({
                                     icon: 'success',
-                                    title: 'Signed in successfully'
+                                    title: 'Pendaftaran Berhasil!'
                                   });</script>";
                             } else {
                                 $msg = "<script>Swal.fire({
