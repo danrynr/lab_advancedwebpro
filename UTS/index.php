@@ -12,17 +12,21 @@
         $timeout = 300; //SESSION TIMEOUT 5 MENIT
         ini_set("session.gc_maxlifetime", $timeout);
 
+        $session_name = session_name();
         session_start();
 
-        $session_name = session_name();
+        if(!isset($_COOKIE[$session_name])) {
+            setcookie($session_name, "", -70000, '/');
+            session_unset();
+            session_destroy();
+            header("location:login.php");
+            exit;
+        }
 
         if(isset($_COOKIE[$session_name])) {
             setcookie($session_name, $_COOKIE[$session_name], time() + $timeout, '/');
         }
 
-        if(!isset($_COOKIE[$session_name])) {
-            header("location:login.php");
-        }
         //Harga per item
         $ps = 120000;   
         $vc = 110000;
@@ -243,7 +247,7 @@
                     </section>
                 </div>
 
-                <button class="order" name="order">Bayar</button>
+                <button class="order" name="order">Checkout</button>
             </div>
         </form>
     </div>
